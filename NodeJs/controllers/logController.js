@@ -24,11 +24,11 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     var lg = new Log({
+        id_occupant: req.body.id_occupant,
         name: req.body.name,
-        phone_number: req.body.phone_number,
-        house_number: req.body.house_number,
-        images: req.body.images,
-        license_plate: req.body.license_plate
+        license_plate: req.body.license_plate,
+        status: req.body.status,
+        date: req.body.date
     });
     lg.save((err, doc) => {
         if (!err) { res.send(doc); }
@@ -41,11 +41,11 @@ router.put('/:id', (req, res) => {
         return res.status(400).send(`No record with given id : ${req.params.id}`);
 
     var lg = {
+        id_occupant: req.body.id_occupant,
         name: req.body.name,
-        phone_number: req.body.phone_number,
-        house_number: req.body.house_number,
-        images: req.body.images,
-        license_plate: req.body.license_plate
+        license_plate: req.body.license_plate,
+        status: req.body.status,
+        date: req.body.date
     };
     Log.findByIdAndUpdate(req.params.id, { $set: lg }, { new: true }, (err, doc) => {
         if (!err) { res.send(doc); }
