@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
+import { UserService } from '../shared/user.service';
+import { Router } from "@angular/router";
 import { OccupantService } from '../shared/occupant.service';
 import { Occupant } from '../shared/occupant.model';
 
@@ -14,7 +15,7 @@ declare var M: any;
 })
 export class OccupantComponent implements OnInit {
 
-  constructor(private occupantService: OccupantService) { }
+  constructor(private occupantService: OccupantService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.resetForm();
@@ -69,6 +70,11 @@ export class OccupantComponent implements OnInit {
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });
     }
+  }
+
+  onLogout(){
+    this.userService.deleteToken();
+    this.router.navigate(['/login']);
   }
 
 }
